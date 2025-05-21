@@ -34,6 +34,7 @@ namespace visualMemory
         private List<Circle> circles;
         private Random rand;
         private const float CircleSize = 150f;
+        private bool isGameOver = false;
 
         public GameView(Context context) : base(context)
         {
@@ -52,8 +53,15 @@ namespace visualMemory
 
             foreach (var c in circles)
             {
-                paint.Color = c.IsClickable ? Color.Green : Color.Gray;
+                paint.Color = c.IsClickable ? Color.White : Color.White;
                 canvas.DrawOval(c.Bounds, paint);
+            }
+            if (isGameOver)
+            {
+                paint.Color = Color.White;
+                paint.TextSize = 80;
+                paint.TextAlign = Paint.Align.Center;
+                canvas.DrawText("Game Over", Width / 2, Height / 2, paint);
             }
         }
 
@@ -69,6 +77,10 @@ namespace visualMemory
                 {
                     AddNewCircle();
                 }
+                else
+                {
+                    EndGame();
+                }
                 return true;
             }
 
@@ -77,11 +89,11 @@ namespace visualMemory
 
         private void AddNewCircle()
         {
-            // Disable all existing circles
+            // Disable existing circles
             foreach (var c in circles)
                 c.IsClickable = false;
 
-            // Ensure circle fits within screen bounds
+            // Circle fits within screen bounds
             float maxX = Width - CircleSize;
             float maxY = Height - CircleSize;
 
@@ -98,6 +110,12 @@ namespace visualMemory
 
             circles.Add(new Circle(bounds, true));
             Invalidate();
+        }
+
+        private void EndGame()
+        {
+            isGameOver = true;
+            Invalidate(); // Redraw the screen to show "Game Over"
         }
     }
 }
