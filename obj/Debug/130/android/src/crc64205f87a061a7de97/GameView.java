@@ -11,6 +11,7 @@ public class GameView
 	static {
 		__md_methods = 
 			"n_onDraw:(Landroid/graphics/Canvas;)V:GetOnDraw_Landroid_graphics_Canvas_Handler\n" +
+			"n_onTouchEvent:(Landroid/view/MotionEvent;)Z:GetOnTouchEvent_Landroid_view_MotionEvent_Handler\n" +
 			"";
 		mono.android.Runtime.register ("visualMemory.GameView, visualMemory", GameView.class, __md_methods);
 	}
@@ -58,6 +59,14 @@ public class GameView
 	}
 
 	private native void n_onDraw (android.graphics.Canvas p0);
+
+
+	public boolean onTouchEvent (android.view.MotionEvent p0)
+	{
+		return n_onTouchEvent (p0);
+	}
+
+	private native boolean n_onTouchEvent (android.view.MotionEvent p0);
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
