@@ -62,6 +62,7 @@ namespace visualMemory
                 paint.TextSize = 80;
                 paint.TextAlign = Paint.Align.Center;
                 canvas.DrawText("Game Over", Width / 2, Height / 2, paint);
+                circles.Clear();
             }
         }
 
